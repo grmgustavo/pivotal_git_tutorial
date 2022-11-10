@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de gato aleatório</title>
+</head>
+
+<body>
+
+  <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h1>Bem vindo ao gerador de gato aleatório</h1>
+    <img id="photo" src="https://thecatapi.com/api/images/get?format=src&type=gif" alt="cat" style="height: 200px;">
+    <button id="btn" style="margin: 20px;">Gerar gato!</button>
+  </div>
+
+  <script>
+    var btn = document.querySelector("#btn");
+    var img = document.querySelector("#photo");
+
+    btn.addEventListener("click", function () {
+      var XHR = new XMLHttpRequest();
+
+      XHR.onreadystatechange = function () {
+        if (XHR.readyState == 4 && XHR.status == 200) {
+          img.src = JSON.parse(XHR.responseText).file;
+        }
+      }
+      XHR.open("GET", "https://aws.random.cat/meow");
+      XHR.send();
+    });
+  </script>
+
+</body>
+
+</html>
